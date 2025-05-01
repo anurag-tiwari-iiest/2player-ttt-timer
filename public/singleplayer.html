@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Twisted Tic-Tac-Toe (AI)</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>Advanced Tic-Tac-Toe</h1>
+    <h2>Single Player Mode</h2>
+    <h3>Play against AI</h3>
+
+    <div id="symbol-selection" style="margin-bottom: 1rem; text-align: center;">
+      <button id="select-x" class="btn symbol-btn">Play as X</button>
+      <button id="select-o" class="btn symbol-btn">Play as O</button>
+    </div>
+
+    <!-- Game Board -->
+    <div id="game-board" class="game-board" style="display:none;"></div>
+
+    <!-- Turn Indicator -->
+    <p id="turn-indicator" class="turn-indicator" style="display:none;">X's Turn</p>
+
+    <!-- Buttons -->
+    <button id="reset-btn" class="btn" style="display:none;">Restart Game</button>
+    <a href="index.html" class="btn back-btn">Back to Main Menu</a>
+  </div>
+
+  <footer class="footer">
+    <p class="footer-text">
+      Made with <span class="heart">❤️</span> by Anurag Vinod Tiwari
+    </p>
+  </footer>
+
+  <script src="ai.js"></script>
+</body>
+</html>
