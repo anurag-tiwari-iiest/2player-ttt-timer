@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Adv Tic-Tac-Toe by Anurag</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>Tic Tac Toe</h1>
+    <h2>Two Player Mode</h2>
+
+    <!-- Timer Display -->
+    <div id="timer-container" style="position:absolute; top:20px; right:20px; font-size:20px;">
+      ⏱
+    </div>
+
+    <!-- Game Board -->
+    <div id="game-board" class="game-board"></div>
+
+    <!-- Turn Indicator -->
+    <p id="turn-indicator" class="turn-indicator">Waiting for Opponent...</p>
+
+    <!-- Buttons -->
+    <button id="giveup-btn" class="btn">Give Up</button>
+    <a href="index.html" class="btn back-btn">Back to Main Menu</a>
+  </div>
+
+  <div id="result-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2 id="result-message"></h2>
+      <button id="play-again-btn" class="btn">Challenge Again</button>
+      <button id="menu-btn" class="btn back-btn">Go to Menu</button>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p class="footer-text">
+      Made with <span class="heart">❤️</span> by Anurag Vinod Tiwari
+    </p>
+  </footer>
+
+  <!-- Import Socket.IO client -->
+  <script src="/socket.io/socket.io.js"></script>
+  
+  <!-- Your game logic -->
+  <script src="game.js"></script>
+</body>
+</html>

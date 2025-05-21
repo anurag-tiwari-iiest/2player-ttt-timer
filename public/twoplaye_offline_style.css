@@ -1,0 +1,164 @@
+/* Reset + General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #00c9ff, #92fe9d);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+  }
+  
+  /* Container */
+  .container {
+    background-color: #ffffffee;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+  }
+  
+  /* Headings */
+  h1 {
+    font-size: 2.2rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+  
+  h2 {
+    font-size: 1.4rem;
+    color: #16a085;
+    margin-bottom: 20px;
+  }
+  
+  /* Turn Indicator */
+  .turn-indicator {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    font-weight: bold;
+    text-align: center;
+    transition: color 0.3s ease;
+    padding: 10px;
+    border-radius: 8px;
+    background: #ecf0f1;
+    color: #2c3e50;
+  }
+  
+  .turn-indicator.end-message {
+    color: #2ecc71; /* A green winning color */
+    font-size: 1.4rem;
+  }
+  
+  
+  /* Game Board */
+  .game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 10px;
+    justify-content: center;
+    margin: 20px auto;
+  }
+  
+  .game-board div {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(to bottom right, #ffffff, #d0eaff);
+    border-radius: 15px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #34495e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .game-board div:hover {
+    background: #b8e0ff;
+  }
+  
+  /* Faded state for old pieces */
+  .faded {
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+  }
+  
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 10px 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background: #2980b9;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #3498db;
+  }
+  
+  .back-btn {
+    background: #7f8c8d;
+  }
+  
+  .back-btn:hover {
+    background: #95a5a6;
+  }
+  
+  /* Footer styling */
+  .footer {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    z-index: 1000;
+  }
+  
+  .footer-text {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.95rem;
+    color: #555;
+    font-weight: 500;
+  }
+  
+  .heart {
+    display: inline-block;
+    animation: pump 1.5s infinite;
+    transform-origin: center;
+    color: #ff4d4d;
+  }
+  
+  @keyframes pump {
+    0% {
+      transform: scale(1);
+      color: #ff4d4d;
+    }
+    50% {
+      transform: scale(1.4);
+      color: #ff0000;
+    }
+    100% {
+      transform: scale(1);
+      color: #ff4d4d;
+    }
+  }
+  

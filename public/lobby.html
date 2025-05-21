@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lobby - Tic Tac Toe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Tic Tac Toe Lobby</h1>
+
+    <div id="lobby-controls" class="lobby-controls">
+
+      <div class="create-section">
+        <button id="create-lobby-btn" class="btn">➕ Create New Lobby</button>
+      </div>
+
+      <div class="divider">
+        <p>OR</p>
+      </div>
+
+      <div class="join-section">
+        <input type="text" id="join-code-input" placeholder="Enter Lobby Code" class="input-field"/>
+        <button id="join-lobby-btn" class="btn">🔗 Join Lobby</button>
+      </div>
+
+    </div>
+
+    <div id="waiting-section" class="hidden">
+      <p id="lobby-info"></p>
+      <p>Waiting for opponent to join...</p>
+    </div>
+
+    <div id="error-section" class="hidden">
+      <p id="error-message" style="color: #ff4d4d; font-weight: bold;"></p>
+    </div>
+
+    <a href="index.html" class="btn back-btn">🏠 Back to Main Menu</a>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="lobby.js"></script>
+</body>
+</html>
