@@ -3,28 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Advanced Tic-Tac-Toe | Anurag</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#0a0a0f">
+  <meta name="description" content="Disappearing Tic-Tac-Toe - A strategic twist on the classic game where your oldest move vanishes after placing your 4th piece.">
+  <title>Disappearing Tic-Tac-Toe</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
     <h1>Disappearing</h1>
     <h1>Tic-Tac-Toe</h1>
-    <p class="subtitle">Choose your game mode</p>
+    <p class="subtitle">Choose your battle mode</p>
 
     <div class="game-modes">
-      <a href="singleplayer.html" class="btn">🎮 Single Player</a>
-      <a href="twoplayer_offline.html" class="btn">👥 Two Player</a>
-      <a href="twoplayer.html" class="btn">👥 Play with a Friend!</a>
+      <a href="/singleplayer" class="btn">
+        <span>🤖</span> VS Computer
+      </a>
+      <a href="/twoplayer_offline" class="btn">
+        <span>👥</span> Local Multiplayer
+      </a>
+      <a href="/lobby" class="btn">
+        <span>🌐</span> Online Battle
+      </a>
     </div>
 
     <div class="about">
-      <h2>What is this?</h2>
-      <p>This is a modern twist on the classic Tic-Tac-Toe game. Choose your mode, challenge a friend or test your skills against AI!</p>
-       <div class="rules-section">
-         <button class="btn rules-btn" id="open-rules-btn">📜 Read Rules</button>
-       </div>
+      <h2>⚡ What's Different?</h2>
+      <p>A strategic twist on the classic game. Your oldest move vanishes after placing your 4th piece. Outsmart your opponent before your moves disappear!</p>
+      <div class="rules-section">
+        <button class="btn rules-btn" id="open-rules-btn">📜 Game Rules</button>
+      </div>
     </div>
   </div>
 
@@ -32,28 +42,28 @@
   <div class="modal" id="rules-modal">
     <div class="modal-content">
       <span class="close-btn" id="close-rules-btn">&times;</span>
-      <h2>🧠 How to Play</h2>
+      <h2>🎮 How to Play</h2>
       <ul class="rules-list">
-        <li>The game is played on a 3×3 grid.</li>
-        <li>Two players take turns — one as "X", the other as "O".</li>
+        <li>Battle on a <strong>3×3 grid</strong> — classic arena, new rules.</li>
+        <li>Two players alternate turns — <strong>X</strong> goes first, then <strong>O</strong>.</li>
         <li>You can only have <strong>3 active moves</strong> on the board at a time.</li>
-        <li>If you place a fourth move, your <strong>oldest move disappears</strong>.</li>
-        <li>The oldest move will also appear faded, so you know it's about to go!</li>
-        <li>You win if your current 3 marks line up horizontally, vertically, or diagonally.</li>
-        <li>If the board is full and no one wins, it's a tie. 🤝</li>
-        <li>Click the reset button any time to start over!</li>
+        <li>Place a 4th piece? Your <strong>oldest move disappears</strong> instantly.</li>
+        <li>Watch for <strong>faded pieces</strong> — they're about to vanish!</li>
+        <li>Align 3 of your current marks in a row to <strong>claim victory</strong>.</li>
+        <li>In online mode, a <strong>15-second timer</strong> keeps the action fast.</li>
+        <li>Run out of time? Your opponent <strong>wins by default</strong>.</li>
       </ul>
     </div>
   </div>
 
   <footer class="footer">
-    <p>Made with <span class="heart">❤️</span> by <strong>Anurag Vinod Tiwari</strong></p>
+    <p>Crafted with <span class="heart">❤️</span> by <strong>Anurag Vinod Tiwari</strong></p>
     <p class="socials">
       <a href="https://github.com/anurag-tiwari-iiest" target="_blank">GitHub</a> |
       <a href="https://www.linkedin.com/in/anurag-tiwari-84ab3623b/" target="_blank">LinkedIn</a>
     </p>
   </footer>
 
-  <script src="rules.js"></script>
+  <script src="/js/pages/rules.js"></script>
 </body>
 </html>

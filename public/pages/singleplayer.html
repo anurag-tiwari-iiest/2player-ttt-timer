@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#0a0a0f">
+  <meta name="description" content="Play Tic-Tac-Toe against AI">
+  <title>VS Computer - Tic Tac Toe</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>VS Computer</h1>
+    <h2>🤖 Single Player Mode</h2>
+    <h3>Challenge the AI</h3>
+
+    <div id="symbol-selection">
+      <button id="select-x" class="btn symbol-btn">⚔️ Play as X</button>
+      <button id="select-o" class="btn symbol-btn">🛡️ Play as O</button>
+    </div>
+
+    <!-- Game Board -->
+    <div id="game-board" class="game-board" style="display:none;"></div>
+
+    <!-- Turn Indicator -->
+    <p id="turn-indicator" class="turn-indicator" style="display:none;">X's Turn</p>
+
+    <!-- Buttons -->
+    <div style="margin-top: 20px;">
+      <button id="reset-btn" class="btn" style="display:none;">🔄 Restart</button>
+      <a href="/" class="btn back-btn">🏠 Back to Menu</a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p class="footer-text">
+      Crafted with <span class="heart">❤️</span> by <strong>Anurag Vinod Tiwari</strong>
+    </p>
+  </footer>
+
+  <script src="/js/game/AIGame.js"></script>
+</body>
+</html>

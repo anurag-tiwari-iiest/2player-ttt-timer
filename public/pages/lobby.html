@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0f">
+  <meta name="description" content="Create or join an online Tic-Tac-Toe room">
+  <title>Online Lobby - Tic Tac Toe</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>Online Arena</h1>
+    <h2>🌐 Find Your Opponent</h2>
+
+    <div id="lobby-controls" class="lobby-controls">
+      <div class="create-section">
+        <div class="timer-selection">
+          <p class="timer-label">⏱ Turn Timer</p>
+          <div class="timer-options" id="timer-options">
+            <button class="timer-btn" data-duration="10">10s</button>
+            <button class="timer-btn" data-duration="20">20s</button>
+            <button class="timer-btn" data-duration="30">30s</button>
+            <button class="timer-btn selected" data-duration="15">15s</button>
+            <button class="timer-btn" data-duration="45">45s</button>
+            <button class="timer-btn" data-duration="60">60s</button>
+          </div>
+        </div>
+        <button id="create-lobby-btn" class="btn">⚡ Create New Room</button>
+      </div>
+
+      <div class="divider">
+        <p>OR</p>
+      </div>
+
+      <div class="join-section">
+        <input type="text" id="join-code-input" placeholder="ENTER 6-DIGIT CODE" class="input-field" maxlength="6" autocomplete="off" spellcheck="false"/>
+        <button id="join-lobby-btn" class="btn">🔗 Join Room</button>
+      </div>
+    </div>
+
+    <div id="waiting-section" class="hidden">
+      <p id="lobby-info"></p>
+      <p>⏳ Waiting for opponent to connect...</p>
+      <div class="loading-dots">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div id="error-section" class="hidden">
+      <p id="error-message"></p>
+    </div>
+
+    <a href="/" class="btn back-btn">🏠 Back to Menu</a>
+  </div>
+
+  <footer class="footer">
+    <p>Crafted with <span class="heart">❤️</span> by <strong>Anurag Vinod Tiwari</strong></p>
+  </footer>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/pages/lobby.js"></script>
+</body>
+</html>

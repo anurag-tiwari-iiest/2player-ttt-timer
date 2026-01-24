@@ -1,18 +1,25 @@
 {
-  "name": "tic-tac-toe-adv",
-  "version": "1.0.0",
-  "description": "",
-  "main": "ai.js",
+  "name": "disappearing-tic-tac-toe",
+  "version": "2.0.0",
+  "description": "Disappearing Tic-Tac-Toe - A strategic twist on the classic game with online multiplayer support",
+  "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/anurag-tiwari-iiest/advanced-tic-tac-toe.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "tic-tac-toe",
+    "game",
+    "multiplayer",
+    "socket.io",
+    "express"
+  ],
+  "author": "Anurag Vinod Tiwari",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
@@ -20,8 +27,11 @@
   },
   "homepage": "https://github.com/anurag-tiwari-iiest/advanced-tic-tac-toe#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^5.1.0",
-    "socket.io": "^4.8.1",
-    "uuid": "^11.1.0"
+    "socket.io": "^4.8.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

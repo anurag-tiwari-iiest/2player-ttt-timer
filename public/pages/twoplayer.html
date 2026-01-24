@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#0a0a0f">
+  <meta name="description" content="Online multiplayer Tic-Tac-Toe battle">
+  <title>Online Battle - Tic Tac Toe</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>Online Battle</h1>
+    <h2>🌐 Two Player Mode</h2>
+
+    <!-- Timer Display (above board) -->
+    <div id="timer-container">⏱ --</div>
+
+    <!-- Game Board -->
+    <div id="game-board" class="game-board"></div>
+
+    <!-- Turn Indicator -->
+    <p id="turn-indicator" class="turn-indicator">⏳ Connecting...</p>
+
+    <!-- Buttons -->
+    <div style="margin-top: 20px;">
+      <button id="giveup-btn" class="btn">🏳️ Surrender</button>
+      <a href="/" class="btn back-btn">🏠 Exit Game</a>
+    </div>
+  </div>
+
+  <!-- Result Modal -->
+  <div id="result-modal" class="modal hidden">
+    <div class="modal-content result-modal-content">
+      <h2 id="result-message">Game Over</h2>
+      <p id="result-subtitle" class="result-subtitle"></p>
+      <div class="result-buttons">
+        <button id="play-again-btn" class="btn primary-btn">⚔️ Challenge Again</button>
+        <button id="menu-btn" class="btn back-btn">🏠 Return to Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p class="footer-text">
+      Crafted with <span class="heart">❤️</span> by <strong>Anurag Vinod Tiwari</strong>
+    </p>
+  </footer>
+
+  <!-- Import Socket.IO client -->
+  <script src="/socket.io/socket.io.js"></script>
+  
+  <!-- Game logic -->
+  <script src="/js/game/OnlineGame.js"></script>
+</body>
+</html>
