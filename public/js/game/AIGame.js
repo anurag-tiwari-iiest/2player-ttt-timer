@@ -171,7 +171,10 @@ class AIGame {
   }
 
   /**
-   * Get best move using minimax algorithm
+   * Get best move using minimax algorithm with vanishing move awareness.
+   * 
+   * Key insight: The AI remembers which opponent move is going to disappear,
+   * allowing it to exploit situations where a blocking piece will vanish.
    */
   getBestMove() {
     let bestScore = -Infinity;
@@ -181,21 +184,34 @@ class AIGame {
       .map((v, i) => v === '' ? i : null)
       .filter(v => v !== null);
 
+    // Get current move states
+    const currentOState = [...this.oMoves];
+    const currentXState = [...this.xMoves];
+
     for (const i of available) {
-      // Try move
+      // Simulate AI making this move
       const boardCopy = [...this.board];
       boardCopy[i] = this.aiSymbol;
       
-      let aiMovesCopy = [...(this.aiSymbol === 'O' ? this.oMoves : this.xMoves), i];
-      if (aiMovesCopy.length > 3) aiMovesCopy = aiMovesCopy.slice(1);
+      // Track moves and handle vanishing
+      let newOState = [...currentOState];
+      let newXState = [...currentXState];
+      
+      if (this.aiSymbol === 'O') {
+        newOState.push(i);
+        if (newOState.length > 3) {
+          const vanishing = newOState.shift();
+          boardCopy[vanishing] = '';
+        }
+      } else {
+        newXState.push(i);
+        if (newXState.length > 3) {
+          const vanishing = newXState.shift();
+          boardCopy[vanishing] = '';
+        }
+      }
 
-      const score = this.minimax(
-        boardCopy,
-        this.aiSymbol === 'O' ? aiMovesCopy : this.xMoves,
-        this.aiSymbol === 'X' ? aiMovesCopy : this.oMoves,
-        0,
-        false
-      );
+      const score = this.minimax(boardCopy, newOState, newXState, 0, false);
 
       if (score > bestScore) {
         bestScore = score;
@@ -207,59 +223,182 @@ class AIGame {
   }
 
   /**
-   * Minimax algorithm
+   * Minimax algorithm with alpha-beta pruning and vanishing move tracking.
+   * 
+   * Alpha-beta pruning dramatically reduces the search space by cutting off
+   * branches that can't possibly affect the final decision.
+   * 
+   * @param {Array} boardState - Current board state
+   * @param {Array} oState - O's move history (oldest first)
+   * @param {Array} xState - X's move history (oldest first)
+   * @param {number} depth - Current search depth
+   * @param {boolean} isMax - Is this the maximizing player's turn?
+   * @param {number} alpha - Best score the maximizer can guarantee
+   * @param {number} beta - Best score the minimizer can guarantee
    */
-  minimax(boardState, oState, xState, depth, isMax) {
+  minimax(boardState, oState, xState, depth, isMax, alpha = -Infinity, beta = Infinity) {
+    // Check for winner
     const winner = this.evalWinner(oState, xState);
-    if (winner === this.aiSymbol) return 10 - depth;
-    if (winner === this.playerSymbol) return depth - 10;
-    if (boardState.every(cell => cell !== '')) return 0;
+    if (winner === this.aiSymbol) return 100 - depth;  // Prefer quicker wins
+    if (winner === this.playerSymbol) return depth - 100;  // Prefer longer losses
+
+    // Depth limit - 5 is plenty for TTT with good heuristics
+    if (depth >= 5) {
+      return this.evaluatePosition(oState, xState);
+    }
 
     const available = boardState
       .map((v, i) => v === '' ? i : null)
       .filter(i => i !== null);
 
+    // If no moves available, evaluate position
+    if (available.length === 0) {
+      return this.evaluatePosition(oState, xState);
+    }
+
     if (isMax) {
+      // AI's turn (maximizing)
       let maxEval = -Infinity;
       for (const i of available) {
-        boardState[i] = this.aiSymbol;
-        let newMoves = this.aiSymbol === 'X' ? [...xState, i] : [...oState, i];
-        if (newMoves.length > 3) newMoves = newMoves.slice(1);
+        const newBoard = [...boardState];
+        newBoard[i] = this.aiSymbol;
         
-        const evalScore = this.minimax(
-          boardState,
-          this.aiSymbol === 'O' ? newMoves : oState,
-          this.aiSymbol === 'X' ? newMoves : xState,
-          depth + 1,
-          false
-        );
-        boardState[i] = '';
+        // Handle vanishing for AI
+        let newOState = [...oState];
+        let newXState = [...xState];
+        
+        if (this.aiSymbol === 'O') {
+          newOState.push(i);
+          if (newOState.length > 3) {
+            const vanishing = newOState.shift();
+            newBoard[vanishing] = '';
+          }
+        } else {
+          newXState.push(i);
+          if (newXState.length > 3) {
+            const vanishing = newXState.shift();
+            newBoard[vanishing] = '';
+          }
+        }
+        
+        const evalScore = this.minimax(newBoard, newOState, newXState, depth + 1, false, alpha, beta);
         maxEval = Math.max(maxEval, evalScore);
+        alpha = Math.max(alpha, evalScore);
+        
+        // Beta cutoff - minimizer won't allow this path
+        if (beta <= alpha) break;
       }
       return maxEval;
     } else {
+      // Player's turn (minimizing)
       let minEval = Infinity;
       for (const i of available) {
-        boardState[i] = this.playerSymbol;
-        let newMoves = this.playerSymbol === 'X' ? [...xState, i] : [...oState, i];
-        if (newMoves.length > 3) newMoves = newMoves.slice(1);
+        const newBoard = [...boardState];
+        newBoard[i] = this.playerSymbol;
         
-        const evalScore = this.minimax(
-          boardState,
-          this.playerSymbol === 'O' ? newMoves : oState,
-          this.playerSymbol === 'X' ? newMoves : xState,
-          depth + 1,
-          true
-        );
-        boardState[i] = '';
+        // Handle vanishing for player
+        let newOState = [...oState];
+        let newXState = [...xState];
+        
+        if (this.playerSymbol === 'O') {
+          newOState.push(i);
+          if (newOState.length > 3) {
+            const vanishing = newOState.shift();
+            newBoard[vanishing] = '';
+          }
+        } else {
+          newXState.push(i);
+          if (newXState.length > 3) {
+            const vanishing = newXState.shift();
+            newBoard[vanishing] = '';
+          }
+        }
+        
+        const evalScore = this.minimax(newBoard, newOState, newXState, depth + 1, true, alpha, beta);
         minEval = Math.min(minEval, evalScore);
+        beta = Math.min(beta, evalScore);
+        
+        // Alpha cutoff - maximizer won't allow this path
+        if (beta <= alpha) break;
       }
       return minEval;
     }
   }
 
   /**
-   * Evaluate winner from move states
+   * Evaluate position heuristically when depth limit reached.
+   * 
+   * This considers:
+   * - How close each player is to winning
+   * - Which moves are about to vanish and their strategic importance
+   * - Control of center and corners
+   */
+  evaluatePosition(oState, xState) {
+    const winPatterns = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8],
+      [0, 3, 6], [1, 4, 7], [2, 5, 8],
+      [0, 4, 8], [2, 4, 6]
+    ];
+
+    let score = 0;
+    
+    // Get active moves (last 3 for each player)
+    const oActive = new Set(oState.slice(-3));
+    const xActive = new Set(xState.slice(-3));
+    
+    const aiActive = this.aiSymbol === 'O' ? oActive : xActive;
+    const playerActive = this.playerSymbol === 'O' ? oActive : xActive;
+    
+    // Identify vanishing moves (oldest move if at 3 moves)
+    const aiVanishing = (this.aiSymbol === 'O' ? oState : xState).length >= 3 
+      ? (this.aiSymbol === 'O' ? oState : xState)[0] 
+      : -1;
+    const playerVanishing = (this.playerSymbol === 'O' ? oState : xState).length >= 3 
+      ? (this.playerSymbol === 'O' ? oState : xState)[0] 
+      : -1;
+
+    for (const pattern of winPatterns) {
+      const aiCount = pattern.filter(i => aiActive.has(i)).length;
+      const playerCount = pattern.filter(i => playerActive.has(i)).length;
+
+      // Score for AI
+      if (playerCount === 0) {
+        if (aiCount === 2) {
+          score += 10;
+          // Bonus if this line doesn't include AI's vanishing move
+          if (!pattern.includes(aiVanishing)) score += 5;
+        } else if (aiCount === 1) {
+          score += 1;
+        }
+      }
+
+      // Score against player
+      if (aiCount === 0) {
+        if (playerCount === 2) {
+          score -= 10;
+          // Reduce threat if player's vanishing move is in this line
+          // (the threat will resolve itself when that piece disappears)
+          if (pattern.includes(playerVanishing)) score += 4;
+        } else if (playerCount === 1) {
+          score -= 1;
+        }
+      }
+    }
+
+    // Bonus for controlling center
+    if (aiActive.has(4)) score += 3;
+    if (playerActive.has(4)) score -= 3;
+
+    // Bonus for corners
+    const corners = [0, 2, 6, 8];
+    score += corners.filter(c => aiActive.has(c)).length * 2;
+    score -= corners.filter(c => playerActive.has(c)).length * 2;
+
+    return score;
+  }
+
+  /**
+   * Evaluate winner from move states (only considers active moves)
    */
   evalWinner(oState, xState) {
     const winPatterns = [

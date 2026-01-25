@@ -335,7 +335,9 @@ function startGame(room) {
   // Randomly assign X and O to players
   randomizePlayerSymbols(room);
   
-  room.gameState = createInitialGameState();
+  // Use room's timer duration (set during lobby creation)
+  const timerDuration = room.timerDuration || TURN_TIMER_SECONDS;
+  room.gameState = createInitialGameState(timerDuration);
   room.gameState.isActive = true;
   room.gameState.turnStartTime = Date.now();
   room.status = ROOM_STATUS.IN_GAME;
