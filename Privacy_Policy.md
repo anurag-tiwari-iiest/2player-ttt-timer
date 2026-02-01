@@ -1,6 +1,6 @@
 # Privacy Policy for CrazyToe
 
-**Last Updated: January 26, 2026**
+**Last Updated: February 1st, 2026**
 
 ## Introduction
 
