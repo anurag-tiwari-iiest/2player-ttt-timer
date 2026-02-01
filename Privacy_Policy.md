@@ -50,7 +50,7 @@ The App uses **Google AdMob** to display advertisements. Google AdMob may collec
 - App usage and ad interaction data  
 
 We do not have access to or control over the data collected by Google AdMob. This data is processed in accordance with Google’s Privacy Policy:  
-[https://policies.google.com/privacy](https://policies.google.com/privacy)
+https://policies.google.com/privacy
 
 You can opt out of personalized ads on your device:
 - **Android:** Settings → Google → Ads → Opt out of Ads Personalization or Reset Advertising ID
@@ -86,9 +86,15 @@ These permissions are used solely for App functionality and not for direct data 
 
 ---
 
-## Children’s Privacy
+## Age Requirement (18+)
 
-CrazyToe is intended for a **general audience** and is not specifically targeted at children under the age of 13. We do not knowingly collect personal data from children. If such data is discovered, it will be deleted promptly.
+CrazyToe is intended for users **18 years of age and older**.
+
+This age restriction exists **solely due to the presence of third-party advertisements (Google AdMob)**, which may display content not suitable for minors.
+
+There is **no 18+ or restricted content within the App itself**. The gameplay and features are appropriate for all ages, but access is limited to adults to comply with advertising and platform policy requirements.
+
+We do not knowingly collect personal data from individuals under the age of 18. If such data is discovered, it will be deleted promptly.
 
 ---
 
